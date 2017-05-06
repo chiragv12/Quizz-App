@@ -17,16 +17,10 @@ import android.widget.TextView;
  */
 public class FreeResFrag extends Fragment {
 
-    String question;
-    String answer;
+    String question, answer;
 
     public FreeResFrag() {
 
-    }
-
-    public void setParams(String question, String answer){
-        this.question = question;
-        this.answer = answer;
     }
 
 
@@ -37,6 +31,10 @@ public class FreeResFrag extends Fragment {
         final TextView question = (TextView)fragmentView.findViewById(R.id.textView_freeQuestion);
         final EditText response = (EditText)fragmentView.findViewById(R.id.editText_freeResponce);
         Button submit = (Button)fragmentView.findViewById(R.id.button_submit);
+
+        Bundle bundle = this.getArguments();
+        this.question = bundle.getString("QUESTION");
+        this.answer = bundle.getString("CORRECT_CHOICE");
 
         question.setText(this.question);
 

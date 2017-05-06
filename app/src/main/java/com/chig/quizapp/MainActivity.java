@@ -20,40 +20,81 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentTransaction ft;
     FragmentManager fragmentManager;
+    ArrayList<Bundle> questions = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final MCFrag mc1 = new MCFrag();
-        mc1.setParams("Who is the current number 1 tennis player?", "Novak Djokovic", "Roger Federer", "Rafa Nadal", "Andy Murray", "Andy Murray");
+        Bundle q1 = new Bundle();
+        q1.putString("QUESTION", "Who is the current number 1 tennis player?");
+        q1.putString("CHOICE_A", "Novak Djokovic");
+        q1.putString("CHOICE_B", "Roger Federer");
+        q1.putString("CHOICE_C", "Rafa Nadal");
+        q1.putString("CHOICE_D", "Andy Murray");
+        q1.putString("CORRECT_CHOICE", "Andy Murray");
+        questions.add(q1);
 
-        final MCFrag mc2 = new MCFrag();
-        mc2.setParams("Who has won the most Grand Slams?", "Roger Federer", "Alexander Zverev", "Nick Krygios", "Pete Sampras", "Roger Federer");
+        Bundle q2 = new Bundle();
+        q2.putString("QUESTION", "Who has won the most Grand Slams?");
+        q2.putString("CHOICE_A", "Roger Federer");
+        q2.putString("CHOICE_B", "Alexander Zverev");
+        q2.putString("CHOICE_C", "Nick Krygios");
+        q2.putString("CHOICE_D", "Pete Sampras");
+        q2.putString("CORRECT_CHOICE", "Roger Federer");
+        questions.add(q2);
 
-        final MCFrag mc3 = new MCFrag();
-        mc3.setParams("How many Grand Slams does Roger Federer have?", "17", "19", "15", "18", "18");
+        Bundle q3 = new Bundle();
+        q3.putString("QUESTION", "How many Grand Slams does Roger Federer have?");
+        q3.putString("CHOICE_A", "17");
+        q3.putString("CHOICE_B", "19");
+        q3.putString("CHOICE_C", "15");
+        q3.putString("CHOICE_D", "18");
+        q3.putString("CORRECT_CHOICE", "18");
+        questions.add(q3);
 
-        final MCFrag mc4 = new MCFrag();
-        mc4.setParams("In what year did Rafa Nadal win his last Grand Slam?", "2011", "2016", "2014", "2015", "2014");
+        Bundle q4 = new Bundle();
+        q4.putString("QUESTION", "In what year did Rafa Nadal win his last Grand Slam?");
+        q4.putString("CHOICE_A", "2011");
+        q4.putString("CHOICE_B", "2016");
+        q4.putString("CHOICE_C", "2014");
+        q4.putString("CHOICE_D", "2015");
+        q4.putString("CORRECT_CHOICE", "2014");
+        questions.add(q4);
 
-        final MCFrag mc5 = new MCFrag();
-        mc5.setParams("Who is the best American player", "Jack Sock", "Steve Johnson", "Taylor Fritz", "John Isner", "Jack Sock");
+        Bundle q5 = new Bundle();
+        q5.putString("QUESTION", "Who is the best American player");
+        q5.putString("CHOICE_A", "Jack Sock");
+        q5.putString("CHOICE_B", "Steve Johnson");
+        q5.putString("CHOICE_C", "Taylor Fritz");
+        q5.putString("CHOICE_D", "John Isner");
+        q5.putString("CORRECT_CHOICE", "Jack Sock");
+        questions.add(q5);
 
-        final FreeResFrag fr1 = new FreeResFrag();
-        fr1.setParams("Who won the 2016 French Open?", "Novak Djokovic");
+        Bundle q6 = new Bundle();
+        q6.putString("QUESTION", "Who won the 2016 French Open?");
+        q6.putString("CORRECT_CHOICE", "Novak Djokovic");
+        questions.add(q6);
 
-        final FreeResFrag fr2 = new FreeResFrag();
-        fr2.setParams("How many Grand Slams does Novak Djokovic have?", "12");
+        Bundle q7 = new Bundle();
+        q7.putString("QUESTION", "How many Grand Slams does Novak Djokovic have?");
+        q7.putString("CORRECT_CHOICE", "12");
+        questions.add(q7);
 
-        final FreeResFrag fr3 = new FreeResFrag();
-        fr3.setParams("Who was the only person to win the Calender Slam in the open era?", "Rod Laver");
+        Bundle q8 = new Bundle();
+        q8.putString("QUESTION", "Who was the only person to win the Calender Slam in the open era?");
+        q8.putString("CORRECT_CHOICE", "Rod Laver");
+        questions.add(q8);
 
-        final FreeResFrag fr4 = new FreeResFrag();
-        fr4.setParams("Who is the youngest player currently in the top 20?", "Alexander Zverev");
+        Bundle q9 = new Bundle();
+        q9.putString("QUESTION", "Who is the youngest player currently in the top 20?");
+        q9.putString("CORRECT_CHOICE", "Alexander Zverev");
+        questions.add(q9);
 
-        final FreeResFrag fr5 = new FreeResFrag();
-        fr5.setParams("Who won the most French Open titles?", "Rafa Nadal");
+        Bundle q10 = new Bundle();
+        q10.putString("QUESTION", "Who won the most French Open titles?");
+        q10.putString("CORRECT_CHOICE", "Rafa Nadal");
+        questions.add(q10);
 
 
 
@@ -68,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
         ft = fragmentManager.beginTransaction();
 
 
-        ft.add(R.id.relLayout, mc1);
+        MCFrag initialQuestion = new MCFrag();
+        initialQuestion.setArguments(q1);
+        ft.add(R.id.relLayout, initialQuestion);
 
         ft.commit();
 
@@ -81,60 +124,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 questionNum++;
 
-                switch(questionNum){
-                    case 1:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc1);
-                        ft.commit();
-                        break;
-                    case 2:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc2);
-                        ft.commit();
-                        break;
-                    case 3:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc3);
-                        ft.commit();
-                        break;
-                    case 4:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc4);
-                        ft.commit();
-                        break;
-                    case 5:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc5);
-                        ft.commit();
-                        break;
-                    case 6:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr1);
-                        ft.commit();
-                        break;
-                    case 7:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr2);
-                        ft.commit();
-                        break;
-                    case 8:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr3);
-                        ft.commit();
-                        break;
-                    case 9:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr4);
-                        ft.commit();
-                        break;
-                    case 10:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr5);
-                        ft.commit();
-                        break;
-                    default:
-                        questionNum--;
-                        break;
+                if(questionNum >= 1 && questionNum<= 5){
+                    MCFrag mc = new MCFrag();
+                    mc.setArguments(questions.get(questionNum-1));
+                    ft = fragmentManager.beginTransaction();
+                    ft.replace(R.id.relLayout, mc);
+                    ft.commit();
+                }
+                else if(questionNum >=6 && questionNum <= 10){
+                    FreeResFrag frq = new FreeResFrag();
+                    frq.setArguments(questions.get(questionNum-1));
+                    ft = fragmentManager.beginTransaction();
+                    ft.replace(R.id.relLayout, frq);
+                    ft.commit();
+                }
+                else if(questionNum > 10){
+                    questionNum = 10;
                 }
 
             }
@@ -144,62 +149,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 questionNum--;
-
-                switch(questionNum){
-                    case 1:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc1);
-                        ft.commit();
-                        break;
-                    case 2:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc2);
-                        ft.commit();
-                        break;
-                    case 3:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc3);
-                        ft.commit();
-                        break;
-                    case 4:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc4);
-                        ft.commit();
-                        break;
-                    case 5:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, mc5);
-                        ft.commit();
-                        break;
-                    case 6:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr1);
-                        ft.commit();
-                        break;
-                    case 7:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr2);
-                        ft.commit();
-                        break;
-                    case 8:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr3);
-                        ft.commit();
-                        break;
-                    case 9:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr4);
-                        ft.commit();
-                        break;
-                    case 10:
-                        ft = fragmentManager.beginTransaction();
-                        ft.replace(R.id.relLayout, fr5);
-                        ft.commit();
-                        break;
-                    default:
-                        questionNum++;
-                        break;
+                if(questionNum >= 1 && questionNum<= 5){
+                    MCFrag mc = new MCFrag();
+                    mc.setArguments(questions.get(questionNum-1));
+                    ft = fragmentManager.beginTransaction();
+                    ft.replace(R.id.relLayout, mc);
+                    ft.commit();
                 }
+                else if(questionNum >=6 && questionNum <= 10){
+                    FreeResFrag frq = new FreeResFrag();
+                    frq.setArguments(questions.get(questionNum-1));
+                    frq.setArguments(questions.get(questionNum-1));
+                    ft = fragmentManager.beginTransaction();
+                    ft.replace(R.id.relLayout, frq);
+                    ft.commit();
+                }
+                else if(questionNum < 1){
+                    questionNum = 1;
+                }
+
 
             }
         });

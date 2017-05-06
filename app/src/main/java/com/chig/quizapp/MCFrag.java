@@ -21,14 +21,6 @@ public class MCFrag extends Fragment {
 
     }
 
-    public void setParams(String question, String a, String b, String c, String d, String answer){
-        this.question = question;
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-        this.answer = answer;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +33,14 @@ public class MCFrag extends Fragment {
         RadioButton buttonB = (RadioButton)fragmentView.findViewById(R.id.radioButtonB);
         RadioButton buttonC = (RadioButton)fragmentView.findViewById(R.id.radioButtonC);
         RadioButton buttonD = (RadioButton)fragmentView.findViewById(R.id.radioButtonD);
+
+        Bundle bundle = this.getArguments();
+        this.question = bundle.getString("QUESTION");
+        this.a = bundle.getString("CHOICE_A");
+        this.b = bundle.getString("CHOICE_B");
+        this.c = bundle.getString("CHOICE_C");
+        this.d = bundle.getString("CHOICE_D");
+        this.answer = bundle.getString("CORRECT_CHOICE");
 
         question.setText(this.question);
         buttonA.setText(this.a);
